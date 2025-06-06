@@ -56,6 +56,30 @@ export default function PlayerHistoryModal({ playerId, onClose }: PlayerHistoryM
     const playerGames = match.player1Id === playerId ? match.player1Games : match.player2Games
     const opponentGames = match.player1Id === playerId ? match.player2Games : match.player1Games
 
+    // Construir resultado completo set por set
+    let resultadoCompleto = ""
+
+    // Set 1
+    if (match.player1Id === playerId) {
+      resultadoCompleto += `${match.set1Player1Games}-${match.set1Player2Games}`
+    } else {
+      resultadoCompleto += `${match.set1Player2Games}-${match.set1Player1Games}`
+    }
+
+    // Set 2
+    if (match.player1Id === playerId) {
+      resultadoCompleto += `, ${match.set2Player1Games}-${match.set2Player2Games}`
+    } else {
+      resultadoCompleto += `, ${match.set2Player2Games}-${match.set2Player1Games}`
+    }
+
+    // Set 3 (si existe)
+    if ((match.set3Player1Games > 0 || match.set3Player2Games > 0) && match.player1Id === playerId) {
+      resultadoCompleto += `, ${match.set3Player1Games}-${match.set3Player2Games}`
+    } else if (match.set3Player1Games > 0 || match.set3Player2Games > 0) {
+      resultadoCompleto += `, ${match.set3Player2Games}-${match.set3Player1Games}`
+    }
+
     return {
       isWinner,
       score: `${playerSets}-${opponentSets}`,
@@ -63,6 +87,7 @@ export default function PlayerHistoryModal({ playerId, onClose }: PlayerHistoryM
       opponentSets,
       playerGames,
       opponentGames,
+      resultadoCompleto,
       isSuperTiebreak: match.isSuperTiebreak,
     }
   }
@@ -197,9 +222,7 @@ export default function PlayerHistoryModal({ playerId, onClose }: PlayerHistoryM
 
                           <div className="text-right">
                             <div className="text-lg font-bold">Sets: {result.score}</div>
-                            <div className="text-sm text-gray-600">
-                              Games: {result.playerGames}-{result.opponentGames}
-                            </div>
+                            <div className="text-sm text-gray-600">{result.resultadoCompleto}</div>
                             <div className="flex gap-2 mt-1 justify-end">
                               <Badge variant={result.isWinner ? "default" : "secondary"}>
                                 {result.isWinner ? "Victoria" : "Derrota"}

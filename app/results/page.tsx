@@ -13,6 +13,30 @@ export default function ResultsPage() {
     return players.find((p) => p.id === playerId)?.name || "Jugador desconocido"
   }
 
+  // Función para formatear el resultado completo
+  const formatFullResult = (match: any) => {
+    let resultadoCompleto = ""
+
+    // Set 1
+    if (match.set1Player1Games > 0 || match.set1Player2Games > 0) {
+      resultadoCompleto += `${match.set1Player1Games}-${match.set1Player2Games}`
+    }
+
+    // Set 2
+    if (match.set2Player1Games > 0 || match.set2Player2Games > 0) {
+      if (resultadoCompleto) resultadoCompleto += ", "
+      resultadoCompleto += `${match.set2Player1Games}-${match.set2Player2Games}`
+    }
+
+    // Set 3 (si existe)
+    if (match.set3Player1Games > 0 || match.set3Player2Games > 0) {
+      if (resultadoCompleto) resultadoCompleto += ", "
+      resultadoCompleto += `${match.set3Player1Games}-${match.set3Player2Games}`
+    }
+
+    return resultadoCompleto
+  }
+
   const sortedMatches = [...matches].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 
   return (
@@ -46,6 +70,7 @@ export default function ResultsPage() {
                   const player2Name = getPlayerName(match.player2Id)
                   const winnerName = getPlayerName(match.winnerId)
                   const isPlayer1Winner = match.winnerId === match.player1Id
+                  const resultadoCompleto = formatFullResult(match)
 
                   return (
                     <div key={match.id} className="p-6 hover:bg-gray-50 transition-colors">
@@ -88,9 +113,7 @@ export default function ResultsPage() {
                           </div>
 
                           <div className="text-center">
-                            <div className="text-lg font-medium text-gray-700">
-                              {match.player1Games} - {match.player2Games}
-                            </div>
+                            <div className="text-lg font-medium text-gray-700">{resultadoCompleto}</div>
                             <div className="text-sm text-gray-500">Games</div>
                           </div>
 
@@ -101,12 +124,6 @@ export default function ResultsPage() {
                             </Badge>
                             <div className="text-sm text-gray-500 mt-1">Ganador</div>
                           </div>
-
-                          {match.isSuperTiebreak && (
-                            <div className="text-center">
-                              <Badge variant="outline">Super Tiebreak</Badge>
-                            </div>
-                          )}
                         </div>
                       </div>
                     </div>
