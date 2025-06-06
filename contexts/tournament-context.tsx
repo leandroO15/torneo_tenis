@@ -111,6 +111,21 @@ export function TournamentProvider({ children }: { children: ReactNode }) {
       date: new Date().toISOString(),
     }
     setMatches((prev) => [...prev, newMatch])
+
+    // Eliminar partidos pendientes que coincidan con este resultado
+    const matchDate = new Date().toISOString().split("T")[0] // Solo la fecha (YYYY-MM-DD)
+    setUpcomingMatches((prev) =>
+      prev.filter((upcomingMatch) => {
+        // Verificar si coinciden los jugadores y la fecha
+        const samePlayersAndDate =
+          upcomingMatch.scheduledDate === matchDate &&
+          ((upcomingMatch.player1Id === matchData.player1Id && upcomingMatch.player2Id === matchData.player2Id) ||
+            (upcomingMatch.player1Id === matchData.player2Id && upcomingMatch.player2Id === matchData.player1Id))
+
+        // Si coincide, eliminarlo (retornar false), si no coincide, mantenerlo (retornar true)
+        return !samePlayersAndDate
+      }),
+    )
   }
 
   const removeMatch = (id: string) => {

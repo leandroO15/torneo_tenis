@@ -449,7 +449,7 @@ export default function AdminPage() {
                           <Input
                             type="number"
                             min="0"
-                            value={matchForm.set1Player1Games}
+                            value={matchForm.set1Player1Games || ""}
                             onChange={(e) =>
                               setMatchForm({ ...matchForm, set1Player1Games: Number.parseInt(e.target.value) || 0 })
                             }
@@ -461,7 +461,7 @@ export default function AdminPage() {
                           <Input
                             type="number"
                             min="0"
-                            value={matchForm.set1Player2Games}
+                            value={matchForm.set1Player2Games || ""}
                             onChange={(e) =>
                               setMatchForm({ ...matchForm, set1Player2Games: Number.parseInt(e.target.value) || 0 })
                             }
@@ -480,7 +480,7 @@ export default function AdminPage() {
                           <Input
                             type="number"
                             min="0"
-                            value={matchForm.set2Player1Games}
+                            value={matchForm.set2Player1Games || ""}
                             onChange={(e) =>
                               setMatchForm({ ...matchForm, set2Player1Games: Number.parseInt(e.target.value) || 0 })
                             }
@@ -492,7 +492,7 @@ export default function AdminPage() {
                           <Input
                             type="number"
                             min="0"
-                            value={matchForm.set2Player2Games}
+                            value={matchForm.set2Player2Games || ""}
                             onChange={(e) =>
                               setMatchForm({ ...matchForm, set2Player2Games: Number.parseInt(e.target.value) || 0 })
                             }
@@ -518,7 +518,7 @@ export default function AdminPage() {
                             <Input
                               type="number"
                               min="0"
-                              value={matchForm.set3Player1Games}
+                              value={matchForm.set3Player1Games || ""}
                               onChange={(e) =>
                                 setMatchForm({ ...matchForm, set3Player1Games: Number.parseInt(e.target.value) || 0 })
                               }
@@ -530,7 +530,7 @@ export default function AdminPage() {
                             <Input
                               type="number"
                               min="0"
-                              value={matchForm.set3Player2Games}
+                              value={matchForm.set3Player2Games || ""}
                               onChange={(e) =>
                                 setMatchForm({ ...matchForm, set3Player2Games: Number.parseInt(e.target.value) || 0 })
                               }
@@ -786,7 +786,7 @@ export default function AdminPage() {
                     <Input
                       type="number"
                       min="0"
-                      value={editingMatch.set1Player1Games}
+                      value={editingMatch.set1Player1Games || ""}
                       onChange={(e) =>
                         setEditingMatch({
                           ...editingMatch,
@@ -801,7 +801,7 @@ export default function AdminPage() {
                     <Input
                       type="number"
                       min="0"
-                      value={editingMatch.set1Player2Games}
+                      value={editingMatch.set1Player2Games || ""}
                       onChange={(e) =>
                         setEditingMatch({
                           ...editingMatch,
@@ -823,7 +823,7 @@ export default function AdminPage() {
                     <Input
                       type="number"
                       min="0"
-                      value={editingMatch.set2Player1Games}
+                      value={editingMatch.set2Player1Games || ""}
                       onChange={(e) =>
                         setEditingMatch({
                           ...editingMatch,
@@ -838,7 +838,7 @@ export default function AdminPage() {
                     <Input
                       type="number"
                       min="0"
-                      value={editingMatch.set2Player2Games}
+                      value={editingMatch.set2Player2Games || ""}
                       onChange={(e) =>
                         setEditingMatch({
                           ...editingMatch,
@@ -864,7 +864,7 @@ export default function AdminPage() {
                       <Input
                         type="number"
                         min="0"
-                        value={editingMatch.set3Player1Games}
+                        value={editingMatch.set3Player1Games || ""}
                         onChange={(e) =>
                           setEditingMatch({
                             ...editingMatch,
@@ -879,7 +879,7 @@ export default function AdminPage() {
                       <Input
                         type="number"
                         min="0"
-                        value={editingMatch.set3Player2Games}
+                        value={editingMatch.set3Player2Games || ""}
                         onChange={(e) =>
                           setEditingMatch({
                             ...editingMatch,
